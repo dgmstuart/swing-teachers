@@ -1,6 +1,15 @@
 require 'sinatra'
 
 get '/api/:teacher' do
+  user_response(params["teacher"])
+end
+
+post '/api' do
+  user_response(params["text"])
+end
+
+
+def user_response(teacher_name)
   lookup = {
     "Adamo Ciarallo and Vicci Moore"           => "C804",
     "Ali Taghavi and Katja Uckermann"          => "C364",
@@ -60,7 +69,7 @@ get '/api/:teacher' do
     "William Mauvais and Maeva Truntzer"       => "C493",
   }
 
-  code = lookup[params["teacher"]]
+  code = lookup[teacher_name]
 
   if code.nil?
     "Unknown"
