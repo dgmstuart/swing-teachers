@@ -12,9 +12,9 @@ end
 
 require 'json'
 def user_response(teacher_name)
-  matches = LOOKUP.select{ |name, _code| name.include?(teacher_name) }
+  matches = LOOKUP.select{ |name, _code| name.downcase.include?(teacher_name.downcase) }
 
-  return "Unknown" if matches.empty?
+  return { text: "Sorry - don't know about any events with teachers called that" }.to_json if matches.empty?
 
   lines = matches.inject([]) do |array, (name, code)|
     array << "#{name} - http://www.swingplanit.com/#{code}"
